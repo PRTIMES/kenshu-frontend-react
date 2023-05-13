@@ -9,7 +9,7 @@ datasource db {
 
 model Task {
   id         String    @id @default(cuid())
-  title      String    @default("")
+  title      String    @default("untitled")
   createdAt  DateTime  @default(now()) @map("created_at")
   finishedAt DateTime? @map("finished_at")
 

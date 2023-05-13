@@ -2,6 +2,7 @@
 init:
 	pnpm i
 	pnpm --filter api db:push
+	pnpm --filter api db:seed
 	pnpm --filter api build
 
 .PHONY: start

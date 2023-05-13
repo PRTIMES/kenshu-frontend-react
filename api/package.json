@@ -2,6 +2,7 @@
   "name": "@kenshu-frontend/api",
   "scripts": {
     "db:push": "prisma db push",
+    "db:seed": "tsx prisma/seed.ts",
     "dev": "tsx --watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js"
