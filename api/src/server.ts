@@ -32,6 +32,7 @@ app.get('/api/tasks', async (c) => {
 app.post('/api/tasks', async (c) => {
   const task = await db.task.create({ data: {} });
 
+  c.status(201);
   return c.json({
     task,
   });
@@ -63,6 +64,7 @@ app.delete('/api/tasks/:id', async (c) => {
   const id = c.req.param('id');
   try {
     await db.task.delete({ where: { id } });
+    c.status(204);
     return c.json({ success: true });
   } catch (err) {
     if (err.code === 'P2025') {
