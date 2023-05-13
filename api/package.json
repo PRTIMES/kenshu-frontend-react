@@ -1,3 +1,21 @@
 {
-  "name": "@kenshu-frontend/api"
+  "name": "@kenshu-frontend/api",
+  "scripts": {
+    "db:push": "prisma db push",
+    "dev": "tsx --watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^0.6.0",
+    "@hono/zod-validator": "^0.1.2",
+    "@prisma/client": "^4.14.0",
+    "hono": "^3.1.8",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "prisma": "^4.14.0",
+    "tsx": "^3.12.7",
+    "typescript": "^5.0.4"
+  }
 }
