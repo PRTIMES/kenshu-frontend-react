@@ -1,0 +1,127 @@
+openapi: 3.0.3
+
+info:
+  title: デモ用 API
+  version: 1.0.0
+
+tags:
+  - name: Task
+    description: タスク API
+
+paths:
+  /api/tasks:
+    description: タスクを全て返す
+
+    get:
+      operationId: list-tasks
+      responses:
+        200:
+          description: 200 Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                required:
+                  - tasks
+      tags:
+        - Task
+
+    post:
+      operationId: create-task
+      responses:
+        201:
+          description: 201 Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task:
+                    $ref: '#/components/schemas/Task'
+                required:
+                  - task
+      tags:
+        - Task
+
+  /api/tasks/{task_id}:
+    parameters:
+      - name: task_id
+        in: path
+        description: タスク ID
+        required: true
+        schema:
+          type: string
+          example: clhljirua000034c49r2mf1t7
+
+    patch:
+      operationId: update-task
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: タイトル
+                  example: 犬の散歩に行く
+                finishedAt:
+                  type: string
+                  description: 完了日時
+                  example: 2023-05-13T05:22:12.040Z
+                  nullable: true
+      responses:
+        200:
+          description: 200 Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task:
+                    $ref: '#/components/schemas/Task'
+                required:
+                  - task
+      tags:
+        - Task
+
+    delete:
+      operationId: delete-task
+      responses:
+        204:
+          description: 204 Response
+      tags:
+        - Task
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID (CUID)
+          example: clhljirua000034c49r2mf1t7
+        title:
+          type: string
+          description: タイトル
+          example: 犬の散歩に行く
+        createdAt:
+          type: string
+          description: 作成日時
+          example: 2023-05-13T05:22:04.018Z
+        finishedAt:
+          type: string
+          description: 完了日時
+          example: 2023-05-13T05:22:12.040Z
+          nullable: true
+      required:
+        - id
+        - title
+        - createdAt
+        - finishedAt
