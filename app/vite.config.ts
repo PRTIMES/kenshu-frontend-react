@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import KumaUI from '@kuma-ui/vite';
-import path from 'node:path';
 
 export default defineConfig({
   plugins: [
@@ -10,10 +9,8 @@ export default defineConfig({
     }),
     KumaUI(),
   ],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
+  esbuild: {
+    jsxInject: `import React from 'react'`,
   },
   server: {
     open: true,

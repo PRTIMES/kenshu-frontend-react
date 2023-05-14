@@ -6,6 +6,7 @@
 
 * {
   margin: 0;
+  padding: 0;
 }
 
 html,
@@ -24,6 +25,10 @@ canvas,
 svg {
   display: block;
   max-width: 100%;
+}
+
+ul {
+  list-style: none;
 }
 
 input,
