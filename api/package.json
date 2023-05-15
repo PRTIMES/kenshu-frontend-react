@@ -3,6 +3,7 @@
   "scripts": {
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
+    "db:open": "prisma studio",
     "dev": "tsx --watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js"
