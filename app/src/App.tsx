@@ -1,18 +1,5 @@
-import { Suspense } from 'react';
-import { Tasks } from './components/Tasks';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { k } from '@kuma-ui/core';
-
-const queryClient = new QueryClient();
+import classNames from './App.module.css';
 
 export const App = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <k.main maxWidth={500} mx='auto' pt={32}>
-        <Suspense fallback={<p>loading!!</p>}>
-          <Tasks />
-        </Suspense>
-      </k.main>
-    </QueryClientProvider>
-  );
+  return <h1 className={classNames.heading}>Hello React!</h1>;
 };
