@@ -1,18 +1,17 @@
 import { useListTasks } from "./generated";
-import classNames from "./App.module.css";
+import { style } from "@macaron-css/core";
 
 export const App = () => {
   const { data, isFetching, error } = useListTasks();
-  console.log(data);
 
   if (isFetching) return <div>Now Loading...</div>;
 
   return (
     <main>
-      <h1>Task list</h1>
+      <h1 className={style({ color: "red" })}>Task list</h1>
       <ul>
         {data.data.tasks.map((task) => (
-          <li>{task.title}</li>
+          <li key={task.id}>{task.title}</li>
         ))}
       </ul>
     </main>
