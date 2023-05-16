@@ -1,9 +1,12 @@
 {
   "name": "@kenshu-frontend/app",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "api:gen": "orval"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.29.7",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -14,6 +17,7 @@
     "@types/react-dom": "^18.2.4",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.14",
+    "orval": "^6.15.0",
     "postcss": "^8.4.23",
     "tailwindcss": "^3.3.2",
     "vite": "^4.3.5"
