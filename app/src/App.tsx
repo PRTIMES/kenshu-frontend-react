@@ -2,8 +2,19 @@ import { useListTasks } from "./generated";
 import classNames from "./App.module.css";
 
 export const App = () => {
-  const { data, isFetched, error } = useListTasks();
+  const { data, isFetching, error } = useListTasks();
   console.log(data);
 
-  return <h1 className={classNames.heading}>Hello React!</h1>;
+  if (isFetching) return <div>Now Loading...</div>;
+
+  return (
+    <main>
+      <h1>Task list</h1>
+      <ul>
+        {data.data.tasks.map((task) => (
+          <li>{task.title}</li>
+        ))}
+      </ul>
+    </main>
+  );
 };
