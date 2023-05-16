@@ -5,7 +5,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Axios from "axios";
 import "./styles/global.css";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      suspense: true,
+    },
+  },
+});
 Axios.defaults.baseURL = "http://localhost:8000";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
