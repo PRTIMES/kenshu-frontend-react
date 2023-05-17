@@ -8,6 +8,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       suspense: true,
+      staleTime: Infinity,
     },
   },
 });

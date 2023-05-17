@@ -1,5 +1,11 @@
 import { Suspense } from "react";
-import { useListTasks } from "./generated";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  useListTasks,
+  getListTasksQueryOptions,
+  getListTasksQueryKey,
+  useCreateTask,
+} from "./generated";
 import { style } from "@macaron-css/core";
 import { Button } from "./Button";
 
@@ -24,7 +30,35 @@ const TodoList = () => {
   );
 };
 
+const createTask = async (mutate) => {
+  // const { queryKey, queryFn } = getListTasksQueryOptions();
+  // console.log(queryKey, queryFn);
+  // await queryClient.prefetchQuery({ queryKey, queryFn });
+
+  const res = await mutate();
+  console.log(res);
+};
+
 export const App = () => {
+  const queryClient = useQueryClient();
+  const { queryKey } = getListTasksQueryOptions();
+
+  const { mutate } = useCreateTask({
+    mutation: {
+      onSuccess: (result) => {
+        queryClient.setQueryData(getListTasksQueryKey(), (prevState: any) => {
+          const prevTaskList = prevState.data.tasks;
+          const nextState = {
+            ...prevState,
+            data: { tasks: [...prevTaskList, result.data.task] },
+          };
+
+          return nextState;
+        });
+      },
+    },
+  });
+
   return (
     <main
       className={style({
@@ -59,6 +93,10 @@ export const App = () => {
           color="netoral"
           size="small"
           className={style({ marginLeft: "15px" })}
+          onClick={(e) => {
+            e.preventDefault();
+            mutate();
+          }}
         >
           Create ToDo
         </Button>
