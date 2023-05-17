@@ -7,36 +7,36 @@ import { useCallback, useState } from 'react';
 import Typography from '@mui/joy/Typography';
 import { Task, useListTasks } from './generated';
 
+const MainStyle = {
+  display: 'grid',
+   alignItems: 'center', 
+   width: '100%', 
+   minWidth: '700px', 
+   height: 'auto', 
+   minHeight: '700px'
+}
+
+const ContainerStyle = {
+  display: 'grid',
+  gridTemplateRows: '0.6fr 1.4fr',
+  rowGap: '100px',
+}
+
+const inputStyle = {
+  display: 'grid', 
+  justifyContent: 'center'
+}
+
+const BoxTasksStyle = {
+  display: 'grid',
+  rowGap: '3px',
+}
+
 export const App = () => {
   const [title, setTitle] = useState('');
    
   const onChangeTitle = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value), [title]);
   const { data, status, error } = useListTasks();
-
-  const MainStyle = {
-    display: 'grid',
-     alignItems: 'center', 
-     width: '100%', 
-     minWidth: '700px', 
-     height: 'auto', 
-     minHeight: '700px'
-  }
-
-  const ContainerStyle = {
-    display: 'grid',
-    gridTemplateRows: '0.6fr 1.4fr',
-    rowGap: '100px',
-  }
-
-  const inputStyle = {
-    display: 'grid', 
-    justifyContent: 'center'
-  }
-
-  const BoxTasksStyle = {
-    display: 'grid',
-    rowGap: '3px',
-  }
 
   // const BoxTaskStyle = {
   //   display: 'grid',
@@ -65,7 +65,7 @@ export const App = () => {
             </Box>
           )}
           {
-            status === 'error' && <Typography sx={{ textAlign: 'center'}} textColor='red'>エラーです。</Typography>
+            status === 'error' && <Typography sx={{ textAlign: 'center'}} color='danger'>エラーです。</Typography>
           }
         </Box>
       </Container>
