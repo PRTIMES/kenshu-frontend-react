@@ -6,16 +6,13 @@ import Button from '@mui/joy/Button';
 import { useCallback, useState } from 'react';
 import { useQuery } from 'react-query';
 import Typography from '@mui/joy/Typography';
+import { Task, useListTasks } from './generated';
 
 export const App = () => {
   const [title, setTitle] = useState('');
    
   const onChangeTitle = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value), [title]);
-  
-  const fetcher = async () => {
-    const response = await fetch('http://localhost:8000/api/tasks');
-    return response.json();
-  }
+  const { data, status, error } = useListTasks();
 
   const bodyStyle = {
     display: 'grid',
@@ -32,7 +29,6 @@ export const App = () => {
     rowGap: '100px',
   }
 
-
   const inputStyle = {
     display: 'grid', 
     justifyContent: 'center'
@@ -47,9 +43,6 @@ export const App = () => {
   //   display: 'grid',
   //   gridTemplateColumns: '0.3fr 2.4fr 0.3fr'
   // }
-
-  const {data, isLoading, isSuccess, isError, error} = useQuery(['/api/tasks'], fetcher);
-
   return (
     <body style={bodyStyle}>
       <Container style={ContainerStyle}>
@@ -63,17 +56,17 @@ export const App = () => {
         </Box>
         <Box style={BoxTasksStyle}>
           {
-            isLoading && <Typography color='primary' sx={{ textAlign: 'center'}}>ロード中...</Typography>
+            status === 'loading' && <Typography color='primary' sx={{ textAlign: 'center'}}>ロード中...</Typography>
           }
           {
-            isSuccess && data['tasks'].map((data: JSON) => 
-            <Box key={data['id']}>
+            status === 'success' && data.data.tasks.map((data: Task) => 
+            <Box key={data.id}>
               {/* <CheckCircleOutlineRoundedIcon color='green' /> */}
               <Input value={data['title']} readOnly={true} style={inputStyle}/>
             </Box>
           )}
           {
-            isError && <Typography color='error' sx={{ textAlign: 'center'}}>エラーです。{console.log(error)}</Typography>
+            status === 'error' && <Typography color='error' sx={{ textAlign: 'center'}}>エラーです。{console.log(error)}</Typography>
           }
         </Box>
       </Container>

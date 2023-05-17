@@ -1,7 +1,8 @@
 {
   "name": "@kenshu-frontend/app",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "api:gen": "orval"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -9,6 +10,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/joy": "5.0.0-alpha.79",
     "@mui/material": "^5.13.0",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3"
