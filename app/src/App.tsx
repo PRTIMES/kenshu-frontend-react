@@ -1,17 +1,19 @@
 import { Suspense } from "react";
 import { useListTasks } from "./generated";
 import { style } from "@macaron-css/core";
+import { Button } from "./Button";
 
 const TodoList = () => {
   const { data } = useListTasks();
 
   return (
-    <ul className={style({ marginTop: "25px" })}>
+    <ul className={style({ marginTop: "25px", paddingLeft: "0" })}>
       {data.data.tasks.map((task) => (
         <li
           className={style({
             padding: "15px",
             borderBottom: "1px solid #EBEBEB",
+            listStyle: "none",
           })}
           key={task.id}
         >
@@ -53,6 +55,13 @@ export const App = () => {
         >
           Todo List
         </h1>
+        <Button
+          color="netoral"
+          size="small"
+          className={style({ marginLeft: "15px" })}
+        >
+          Create ToDo
+        </Button>
         <Suspense fallback={<div>Now Loading...</div>}>
           <TodoList />
         </Suspense>
