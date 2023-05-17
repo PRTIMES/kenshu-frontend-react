@@ -65,7 +65,7 @@ export const App = () => {
             </Box>
           )}
           {
-            status === 'error' && <Typography color='error' sx={{ textAlign: 'center'}}>エラーです。{console.log(error)}</Typography>
+            status === 'error' && <Typography sx={{ textAlign: 'center'}} textColor='red'>エラーです。</Typography>
           }
         </Box>
       </Container>
