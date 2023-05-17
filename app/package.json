@@ -1,14 +1,19 @@
 {
   "name": "@kenshu-frontend/app",
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "api:gen": "orval"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/joy": "5.0.0-alpha.79",
     "@mui/material": "^5.13.0",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.3"
   },
   "devDependencies": {
     "@kuma-ui/core": "^0.0.4",
@@ -17,6 +22,7 @@
     "@types/react-dom": "^18.2.4",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.14",
+    "orval": "^6.15.0",
     "postcss": "^8.4.23",
     "tailwindcss": "^3.3.2",
     "vite": "^4.3.5"
