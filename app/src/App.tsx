@@ -4,7 +4,6 @@ import Container from '@mui/joy/Container';
 import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import { useCallback, useState } from 'react';
-import { useQuery } from 'react-query';
 import Typography from '@mui/joy/Typography';
 import { Task, useListTasks } from './generated';
 
@@ -14,7 +13,7 @@ export const App = () => {
   const onChangeTitle = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value), [title]);
   const { data, status, error } = useListTasks();
 
-  const bodyStyle = {
+  const MainStyle = {
     display: 'grid',
      alignItems: 'center', 
      width: '100%', 
@@ -44,7 +43,7 @@ export const App = () => {
   //   gridTemplateColumns: '0.3fr 2.4fr 0.3fr'
   // }
   return (
-    <body style={bodyStyle}>
+    <main style={MainStyle}>
       <Container style={ContainerStyle}>
         <Box>
           <Input
@@ -70,6 +69,6 @@ export const App = () => {
           }
         </Box>
       </Container>
-    </body>
+    </main>
   );
 };
