@@ -103,7 +103,7 @@ export const App = () => {
     setTitle('');
   }, [])
 
-  const handleOpenModal = (data) => {
+  const handleOpenModal = (data: Task) => {
     setUpdateTask(data);
     setIsModalOpen(true);
   }
