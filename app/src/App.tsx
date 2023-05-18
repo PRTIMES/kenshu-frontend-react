@@ -5,10 +5,11 @@ import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import { useCallback, useState } from 'react';
 import Typography from '@mui/joy/Typography';
-import { Task, useListTasks } from './generated';
+import { Task, getListTasksQueryKey, useCreateTask, useListTasks } from './generated';
+import { useQueryClient } from 'react-query';
 
 const MainStyle = {
-  display: 'grid',
+   display: 'grid',
    alignItems: 'center', 
    width: '100%', 
    minWidth: '700px', 
@@ -19,13 +20,15 @@ const MainStyle = {
 const ContainerStyle = {
   display: 'grid',
   gridTemplateRows: '0.6fr 1.4fr',
-  rowGap: '100px',
+  alignItems: 'center',
+  rowGap: '20px',
 }
 
 const inputStyle = {
   display: 'grid', 
   justifyContent: 'center'
 }
+
 
 const BoxTasksStyle = {
   display: 'grid',
@@ -37,6 +40,30 @@ export const App = () => {
    
   const onChangeTitle = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value), [title]);
   const { data, status, error } = useListTasks();
+
+  const client = useQueryClient();
+  const result = useCreateTask({
+    mutation: {
+      onSuccess: (result) => {
+        //useCreateTaskの中でpostが完了してからmutationが行われるので同期関数であるsetQueryData使える
+        client.setQueryData(getListTasksQueryKey(), (prevState: any) => {
+          console.log(result)
+          const prevTaskList = prevState.data.tasks;
+          const nextState = {
+            ...prevState,
+            data: { tasks: [...prevTaskList, result.data.task] },
+          };
+
+          return nextState;
+        });
+      },
+    },
+  });
+
+  const onClickCreateButton = () => {
+    result.mutate();
+    setTitle('');
+  }
 
   // const BoxTaskStyle = {
   //   display: 'grid',
@@ -50,7 +77,7 @@ export const App = () => {
             onChange={onChangeTitle}
             value={title}
             startDecorator={<FormatListBulletedRoundedIcon />}
-            endDecorator={<Button>作成</Button>}
+            endDecorator={<Button onClick={onClickCreateButton} disabled={title.length > 0 ? false : true} >作成</Button>}
           />
         </Box>
         <Box style={BoxTasksStyle}>
