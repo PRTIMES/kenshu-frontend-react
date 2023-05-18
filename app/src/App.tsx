@@ -69,7 +69,7 @@ export const App = () => {
   const [updateTask, setUpdateTask] = useState({});
    
   const onChangeTitle = useCallback((event: React.ChangeEvent<HTMLInputElement>) => setTitle(event.target.value), [title]);
-  const { data, status, error } = useListTasks();
+  const { data, status } = useListTasks();
 
   const client = useQueryClient();
   const createTaskMutation = useCreateTask({
@@ -127,7 +127,7 @@ export const App = () => {
         </Box>
         <Box style={BoxTasksStyle}>
           {
-            status === 'loading' && <Typography color='primary' sx={{ textAlign: 'center'}}>ロード中...</Typography>
+            status === 'loading' && <Typography color='primary' style={{ textAlign: 'center'}}>ロード中...</Typography>
           }
           {
             status === 'success' && data.data.tasks.map((data: Task) => 
@@ -137,7 +137,7 @@ export const App = () => {
             </Box>
           )}
           {
-            status === 'error' && <Typography sx={{ textAlign: 'center'}} color='danger'>エラーです。</Typography>
+            status === 'error' && <Typography style={{ textAlign: 'center'}} color='danger'>エラーです。</Typography>
           }
         </Box>
       </Container>
