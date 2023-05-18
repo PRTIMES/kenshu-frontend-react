@@ -65,7 +65,6 @@ const BoxTaskStyle = {
 
 export const App = () => {
   const [title, setTitle] = useState('');
-  const [isInputReadOnly, setIsInputDisabled] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateTask, setUpdateTask] = useState({});
    
@@ -134,7 +133,7 @@ export const App = () => {
             status === 'success' && data.data.tasks.map((data: Task) => 
             <Box key={data.id}>
               {/* <IconButton onClick={(data) => onClickCheckButton} color='primary'> <CheckCircleOutlineIcon color='success' /> </IconButton> */}
-              <Input value={data.title} readOnly={isInputReadOnly} onClick={() => handleOpenModal(data)} style={InputStyle}/>
+              <Input value={data.title} readOnly onClick={() => handleOpenModal(data)} style={InputStyle}/>
             </Box>
           )}
           {
