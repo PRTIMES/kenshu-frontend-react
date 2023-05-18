@@ -35,7 +35,7 @@ const EditBoxStyle = {
   display: 'grid',
   alignItems: 'center',
   width: '800px',
-  borderRadius: '3px'
+  outline: '0px'
 }
 
 const ContainerStyle = {
@@ -166,8 +166,6 @@ const EditorModal = ({props}) => {
     setIsModalOpen(false);
   };
 
-  console.log(title)
-  console.log(data)
   return (
     <Modal
       style={ModalStyle}
