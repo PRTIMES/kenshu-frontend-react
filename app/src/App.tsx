@@ -20,13 +20,15 @@ const MainStyle = {
 const ContainerStyle = {
   display: 'grid',
   gridTemplateRows: '0.6fr 1.4fr',
-  rowGap: '100px',
+  alignItems: 'center',
+  rowGap: '20px',
 }
 
 const inputStyle = {
   display: 'grid', 
   justifyContent: 'center'
 }
+
 
 const BoxTasksStyle = {
   display: 'grid',
@@ -57,12 +59,6 @@ export const App = () => {
       },
     },
   });
-  //引数がなんで連想配列{}？→client.ts121行目をみると{mutation: ~, axios: ~}となっているので連想配列で渡してあげる。
-  //onSuccessはpromiseオブジェクトにチェインするメソッド。だから、引数にmutationFnに指定したメソッド(APIリクエスト)の結果が使える。
-  //setQueryDataはonSuccessなら使うよね。setQueryDataはリクエストは飛ばさず、キャッシュの部分的更新。。getリクエスト投げるのはfetchで、キャッシュを丸ごと更新
-  //mutate(x)の引数には、useMutation(mutationFn: (x) => {})のxに渡すことができる。
-  //今回はpostしない仕様だから。
-  //mutate()はuseMutateで定義したリソースに関する変更の処理を実行するもの。
 
   const onClickCreateButton = () => {
     result.mutate();
