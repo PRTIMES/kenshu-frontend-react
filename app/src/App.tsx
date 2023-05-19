@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-
+import { Task } from './types/my-type.tsx';
 const config = {
   baseURL: 'http://localhost:8000',
   headers: {
@@ -26,13 +26,6 @@ const queryClient = new QueryClient(
     },
   }
 );
-
-type Task = {
-  id: string
-  title: string
-  createdAt: string
-  finishedAt: string | null
-}
 
 const TodoApp = () => {
   const { data: tasks, isLoading, isError, error } = useQuery({ queryKey: ['/posts'] });
