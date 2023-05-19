@@ -1,13 +1,7 @@
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { config } from './axios-config.tsx'
 import { Task } from './types/my-type.tsx';
-const config = {
-  baseURL: 'http://localhost:8000',
-  headers: {
-    'Content-Type': 'application/json;charset=utf-8',
-    'Access-Control-Allow-Origin': '*',
-  },
-};
 
 const fetcher = async () => {
   const { data } = await axios.get(
