@@ -1,28 +1,19 @@
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { config } from './axios-config.tsx'
 import { Task } from './types/my-type.tsx';
+import { getAllData } from './fetcher.tsx';
 
-const fetcher = async () => {
-  const { data } = await axios.get(
-    'http://127.0.0.1:8000/api/tasks',
-    config
-  )
-  return data;
-};
-
-const queryClient = new QueryClient(
+const queryClientGetAllData = new QueryClient(
   {
     defaultOptions: {
       queries: {
-        queryFn: fetcher,
+        queryFn: getAllData,
       },
     },
   }
 );
 
 const TodoApp = () => {
-  const { data: tasks, isLoading, isError, error } = useQuery({ queryKey: ['/posts'] });
+  const { data: tasks, isLoading, isError, error } = useQuery({ queryKey: [] });
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -57,7 +48,7 @@ const TodoApp = () => {
 };
 
 export const App = () => (
-  <QueryClientProvider client={queryClient}>
+  <QueryClientProvider client={queryClientGetAllData}>
     <TodoApp />
   </QueryClientProvider>
 );
