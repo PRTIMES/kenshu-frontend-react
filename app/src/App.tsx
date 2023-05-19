@@ -1,16 +1,7 @@
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { Task } from './types/my-type.tsx';
 import { getAllData } from './fetcher.tsx';
-
-const queryClientGetAllData = new QueryClient(
-  {
-    defaultOptions: {
-      queries: {
-        queryFn: getAllData,
-      },
-    },
-  }
-);
+import { queryClientGetAllData } from './query-client.tsx';
 
 const TodoApp = () => {
   const { data: tasks, isLoading, isError, error } = useQuery({ queryKey: [] });
@@ -29,7 +20,6 @@ const TodoApp = () => {
       finishedAt: task.finishedAt
     }
   })
-  console.log(taskTyped)
   return (
     <div>
       <h1>Hello TypeScript!</h1>
