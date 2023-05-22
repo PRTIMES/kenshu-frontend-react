@@ -5,3 +5,5 @@ export type Task = {
   finishedAt: string | null
 }
 
+export type stringToVoid = (param: string) => void;
+export type stringToString = (param: string) => string;

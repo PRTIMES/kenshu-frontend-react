@@ -1,5 +1,5 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { getAllData } from './fetcher'
+import { useMutation, QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { getAllData, createTask } from './fetcher'
 
 export const queryClientGetAllData = new QueryClient(
   {
@@ -10,4 +10,3 @@ export const queryClientGetAllData = new QueryClient(
     },
   }
 );
-
