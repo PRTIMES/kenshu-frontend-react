@@ -21,12 +21,10 @@ export const App = () => {
     mutationFn: () => {
       return axios.post("http://localhost:8000/api/tasks");
     },
+    onSuccess: () => {
+      queryClient.refetchQueries(["tasks"]);
+    },
   });
-
-  const Refetch = async () => {
-    await queryClient.refetchQueries();
-  };
-
   //dataが入っているかの判定
   if (isLoading || !data) return <p>Loading...</p>;
   return (
@@ -36,7 +34,6 @@ export const App = () => {
         <button
           className={classNames.button}
           onClick={() => {
-            Refetch;
             mutation.mutate();
           }}
         >
