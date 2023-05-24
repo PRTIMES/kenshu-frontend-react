@@ -34,7 +34,6 @@ export const App = () => {
       url: `http://localhost:8000/api/tasks/${taskId}`,
       data: { title: text, finishedAt: now },
     });
-    console.log(text);
   };
 
   const updateText = (taskId, taskTitle) => {
