@@ -14,3 +14,10 @@
   font-weight: bold;
   border: solid 3px #000000;
 }
+
+.updateButton {
+  font-size: 20px;
+  padding: 2px 2px;
+
+  border: solid 3px #000000;
+}

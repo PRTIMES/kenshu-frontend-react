@@ -67,7 +67,10 @@ export const App = () => {
         {data.tasks.map((task) => (
           <li className={classNames.title} key={task.id}>
             {task.title}
-            <button onClick={() => setId(task.id)}>
+            <button
+              className={classNames.updateButton}
+              onClick={() => setId(task.id)}
+            >
               {updateText(task.id, task.title)}
               編集
             </button>
@@ -77,5 +80,3 @@ export const App = () => {
     </StrictMode>
   );
 };
-
-//idをstateとかに保存しておく、そのidが一致した時に、formを追加する
