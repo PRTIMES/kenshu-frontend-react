@@ -21,16 +21,12 @@ export const App = () => {
     mutationFn: () => {
       return axios.post("http://localhost:8000/api/tasks");
     },
+    onSuccess: () => {
+      queryClient.refetchQueries(["tasks"]);
+    },
   });
 
   if (isLoading || !data) return <p>Loading...</p>;
-
-  // const updateMutation = useMutation({
-  //   mutationFn: (taskId) => {
-  //     return axios.put(`http://localhost:8000/api/tasks/${taskId}`);
-  //   },
-  // });
-  // };
 
   const updateTask = (taskId) => {
     axios({
