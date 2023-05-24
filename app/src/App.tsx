@@ -1,5 +1,5 @@
 import classNames from "./App.module.css";
-import { StrictMode } from "react";
+import { StrictMode, useState } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -8,6 +8,9 @@ const fetchList = () =>
 
 export const App = () => {
   const queryClient = useQueryClient();
+  const [id, setId] = useState("");
+  const [text, setText] = useState("");
+  const now = new Date();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["tasks"],
@@ -21,6 +24,38 @@ export const App = () => {
   });
 
   if (isLoading || !data) return <p>Loading...</p>;
+
+  // const updateMutation = useMutation({
+  //   mutationFn: (taskId) => {
+  //     return axios.put(`http://localhost:8000/api/tasks/${taskId}`);
+  //   },
+  // });
+  // };
+
+  const updateTask = (taskId) => {
+    axios({
+      method: "patch",
+      url: `http://localhost:8000/api/tasks/${taskId}`,
+      data: { title: text, finishedAt: now },
+    });
+    console.log(text);
+  };
+
+  const updateText = (taskId, taskTitle) => {
+    if (id === taskId) {
+      return (
+        <StrictMode>
+          <form onSubmit={updateTask(taskId)}>
+            <input
+              type="text"
+              placeholder={taskTitle}
+              onChange={(event) => setText(event.target.value)}
+            ></input>
+          </form>
+        </StrictMode>
+      );
+    }
+  };
 
   return (
     <StrictMode>
@@ -36,9 +71,15 @@ export const App = () => {
         {data.tasks.map((task) => (
           <li className={classNames.title} key={task.id}>
             {task.title}
+            <button onClick={() => setId(task.id)}>
+              {updateText(task.id, task.title)}
+              編集
+            </button>
           </li>
         ))}
       </ul>
     </StrictMode>
   );
 };
+
+//idをstateとかに保存しておく、そのidが一致した時に、formを追加する
