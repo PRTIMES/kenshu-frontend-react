@@ -3,6 +3,7 @@ import { StrictMode, useState } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
+// usequeryの非同期関数
 const fetchList = () =>
   fetch("http://localhost:8000/api/tasks").then((res) => res.json());
 
@@ -12,11 +13,13 @@ export const App = () => {
   const [text, setText] = useState("");
   const now = new Date();
 
+  // データ取得
   const { data, isLoading, error } = useQuery({
     queryKey: ["tasks"],
     queryFn: fetchList,
   });
 
+  ///　ボタンが押されたらリクエスト送信
   const mutation = useMutation({
     mutationFn: () => {
       return axios.post("http://localhost:8000/api/tasks");
@@ -25,7 +28,7 @@ export const App = () => {
       queryClient.refetchQueries(["tasks"]);
     },
   });
-
+  //dataが入っているかの判定
   if (isLoading || !data) return <p>Loading...</p>;
 
   const updateTask = (e, taskId) => {
@@ -58,6 +61,7 @@ export const App = () => {
 
   return (
     <StrictMode>
+      {/* タスクの追加ボタン */}
       <ul className={classNames.heading}>
         <button
           className={classNames.button}
@@ -67,6 +71,7 @@ export const App = () => {
         >
           タスクの追加
         </button>
+        {/* データの表示 */}
         {data.tasks.map((task) => (
           <li className={classNames.title} key={task.id}>
             {task.title}
