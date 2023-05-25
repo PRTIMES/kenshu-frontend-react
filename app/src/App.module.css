@@ -1,9 +1,16 @@
 .heading {
-  position: fixed;
   inset: 0;
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
   font-size: 40px;
+}
+
+.button {
+  font-size: 30px;
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  font-weight: bold;
+  border: solid 3px #000000;
 }
