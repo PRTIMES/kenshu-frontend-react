@@ -28,11 +28,15 @@ export const App = () => {
 
   if (isLoading || !data) return <p>Loading...</p>;
 
-  const updateTask = (taskId) => {
+  const updateTask = (e, taskId) => {
+    e.preventDefault();
+    setId(null);
     axios({
       method: "patch",
       url: `http://localhost:8000/api/tasks/${taskId}`,
       data: { title: text, finishedAt: now },
+    }).then(() => {
+      mutation.mutate();
     });
   };
 
@@ -40,7 +44,7 @@ export const App = () => {
     if (id === taskId) {
       return (
         <StrictMode>
-          <form onSubmit={updateTask(taskId)}>
+          <form onSubmit={(e) => updateTask(e, taskId)}>
             <input
               type="text"
               placeholder={taskTitle}
