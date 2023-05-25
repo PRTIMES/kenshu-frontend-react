@@ -13,13 +13,11 @@ export const App = () => {
   const [text, setText] = useState("");
   const now = new Date();
 
-  // データ取得
   const { data, isLoading, error } = useQuery({
     queryKey: ["tasks"],
     queryFn: fetchList,
   });
 
-  ///　ボタンが押されたらリクエスト送信
   const mutation = useMutation({
     mutationFn: () => {
       return axios.post("http://localhost:8000/api/tasks");
@@ -61,7 +59,6 @@ export const App = () => {
 
   return (
     <StrictMode>
-      {/* タスクの追加ボタン */}
       <ul className={classNames.heading}>
         <button
           className={classNames.button}
