@@ -7,12 +7,27 @@ import axios from "axios";
 const fetchList = () =>
   fetch("http://localhost:8000/api/tasks").then((res) => res.json());
 
+const EditForm = ({ id, taskId, taskTitle, updateTask, setText }) => {
+  if (id === taskId) {
+    return (
+      <StrictMode>
+        <form onSubmit={(e) => updateTask(e, taskId)}>
+          <input
+            type="text"
+            placeholder={taskTitle}
+            onChange={(event) => setText(event.target.value)}
+          ></input>
+        </form>
+      </StrictMode>
+    );
+  }
+};
+
 export const App = () => {
   const queryClient = useQueryClient();
   const [id, setId] = useState("");
   const [text, setText] = useState("");
   const now = new Date();
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["tasks"],
     queryFn: fetchList,
@@ -26,36 +41,28 @@ export const App = () => {
       queryClient.refetchQueries(["tasks"]);
     },
   });
-  //dataが入っているかの判定
-  if (isLoading || !data) return <p>Loading...</p>;
+
+  const updateMutation = useMutation({
+    mutationFn: (taskId) => {
+      return axios({
+        method: "patch",
+        url: `http://localhost:8000/api/tasks/${taskId}`,
+        data: { title: text, finishedAt: now },
+      });
+    },
+    onSuccess: () => {
+      mutation.mutate();
+    },
+  });
 
   const updateTask = (e, taskId) => {
     e.preventDefault();
     setId(null);
-    axios({
-      method: "patch",
-      url: `http://localhost:8000/api/tasks/${taskId}`,
-      data: { title: text, finishedAt: now },
-    }).then(() => {
-      mutation.mutate();
-    });
+    updateMutation.mutate(taskId);
   };
 
-  const updateText = (taskId, taskTitle) => {
-    if (id === taskId) {
-      return (
-        <StrictMode>
-          <form onSubmit={(e) => updateTask(e, taskId)}>
-            <input
-              type="text"
-              placeholder={taskTitle}
-              onChange={(event) => setText(event.target.value)}
-            ></input>
-          </form>
-        </StrictMode>
-      );
-    }
-  };
+  //dataが入っているかの判定
+  if (isLoading || !data) return <p>Loading...</p>;
 
   return (
     <StrictMode>
@@ -76,7 +83,14 @@ export const App = () => {
               className={classNames.updateButton}
               onClick={() => setId(task.id)}
             >
-              {updateText(task.id, task.title)}
+              {/* {updateText(task.id, task.title)} */}
+              <EditForm
+                id={id}
+                taskId={task.id}
+                taskTitle={task.title}
+                setText={setText}
+                updateTask={updateTask}
+              />
               編集
             </button>
           </li>
