@@ -1,60 +1,14 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { cn } from '../../lib/cn';
-
-type Task = {
-  id: string;
-  title: string;
-  createdAt: string;
-  finishedAt: null | string;
-};
-
-const getTasks = async () => {
-  const res: { tasks: Task[] } = await fetch(
-    'http://localhost:8000/api/tasks',
-  ).then((r) => r.json());
-  return res;
-};
-
-const createTask = () =>
-  fetch('http://localhost:8000/api/tasks', { method: 'POST' });
-
-const finishTask = (taskId: string) =>
-  fetch(`http://localhost:8000/api/tasks/${taskId}`, {
-    method: 'PATCH',
-    body: JSON.stringify({
-      finishedAt: new Date().toISOString(),
-    }),
-  });
-
-const unfinishTask = (taskId: string) =>
-  fetch(`http://localhost:8000/api/tasks/${taskId}`, {
-    method: 'PATCH',
-    body: JSON.stringify({
-      finishedAt: null,
-    }),
-  });
+import { TaskTitle } from './TaskTitle';
+import { useTasksQuery } from '../../api/useTasksQuery';
+import { useCreateTaskMutation } from '../../api/useCreateTaskMutation';
+import { useFinishTaskMutation } from '../../api/useFinishTaskMutation';
+import { useUnfinishTaskMutation } from '../../api/useUnfinishTaskMutation';
 
 export const TopPage = () => {
-  const tasksQuery = useQuery({
-    queryKey: ['tasks'],
-    queryFn: getTasks,
-    suspense: true,
-  });
-
-  const createTaskMutation = useMutation({
-    mutationKey: ['createTask'],
-    mutationFn: createTask,
-  });
-
-  const finishTaskMutation = useMutation({
-    mutationKey: ['finishTask'],
-    mutationFn: finishTask,
-  });
-
-  const unfinishTaskMutation = useMutation({
-    mutationKey: ['unfinishTask'],
-    mutationFn: unfinishTask,
-  });
+  const tasksQuery = useTasksQuery();
+  const createTaskMutation = useCreateTaskMutation();
+  const finishTaskMutation = useFinishTaskMutation();
+  const unfinishTaskMutation = useUnfinishTaskMutation();
 
   const onClickCreateTaskButton = async () => {
     // タスクを追加
@@ -110,13 +64,8 @@ export const TopPage = () => {
                   className='h-6 w-6 rounded-md border-2 border-stone-500 bg-stone-500'
                 />
               )}
-              <p
-                className={cn({
-                  'text-stone-400 line-through': finishedAt !== null,
-                })}
-              >
-                {title}
-              </p>
+
+              <TaskTitle id={id} title={title} finishedAt={finishedAt} />
             </li>
           ))}
         </ul>
