@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 type Task = {
   id: string;
@@ -12,6 +12,8 @@ const getTasks = async () => {
   return res;
 };
 
+const createTask = () => fetch('http://localhost:8000/api/tasks', { method: 'POST' });
+
 export const TopPage = () => {
   const tasksQuery = useQuery({
     queryKey: ['tasks'],
@@ -19,8 +21,24 @@ export const TopPage = () => {
     suspense: true,
   });
 
+  const createTaskMutation = useMutation({
+    mutationKey: ['createTask'],
+    mutationFn: createTask,
+  });
+
+  const onClickCreateTaskButton = async () => {
+    // タスクを追加
+    await createTaskMutation.mutateAsync();
+    // タスク一覧を再取得
+    tasksQuery.refetch();
+  };
+
   return (
     <ul>
+      <button type='button' onClick={onClickCreateTaskButton}>
+        タスクを追加
+      </button>
+
       {tasksQuery.data.tasks.map(({ id, title }) => (
         <li key={id}>
           <p>{title}</p>
