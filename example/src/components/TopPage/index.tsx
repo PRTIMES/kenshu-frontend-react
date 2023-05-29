@@ -18,6 +18,22 @@ const getTasks = async () => {
 const createTask = () =>
   fetch('http://localhost:8000/api/tasks', { method: 'POST' });
 
+const finishTask = (taskId: string) =>
+  fetch(`http://localhost:8000/api/tasks/${taskId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      finishedAt: new Date().toISOString(),
+    }),
+  });
+
+const unfinishTask = (taskId: string) =>
+  fetch(`http://localhost:8000/api/tasks/${taskId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({
+      finishedAt: null,
+    }),
+  });
+
 export const TopPage = () => {
   const tasksQuery = useQuery({
     queryKey: ['tasks'],
@@ -30,9 +46,33 @@ export const TopPage = () => {
     mutationFn: createTask,
   });
 
+  const finishTaskMutation = useMutation({
+    mutationKey: ['finishTask'],
+    mutationFn: finishTask,
+  });
+
+  const unfinishTaskMutation = useMutation({
+    mutationKey: ['unfinishTask'],
+    mutationFn: unfinishTask,
+  });
+
   const onClickCreateTaskButton = async () => {
     // タスクを追加
     await createTaskMutation.mutateAsync();
+    // タスク一覧を再取得
+    tasksQuery.refetch();
+  };
+
+  const onClickFinishTaskButton = async (taskId: string) => {
+    // タスクを完了
+    await finishTaskMutation.mutateAsync(taskId);
+    // タスク一覧を再取得
+    tasksQuery.refetch();
+  };
+
+  const onClickUnfinishTaskButton = async (taskId: string) => {
+    // タスクを未完了に戻す
+    await unfinishTaskMutation.mutateAsync(taskId);
     // タスク一覧を再取得
     tasksQuery.refetch();
   };
@@ -58,14 +98,14 @@ export const TopPage = () => {
               {finishedAt === null ? (
                 <button
                   type='button'
-                  onClick={() => alert('unimplemented')}
+                  onClick={() => onClickFinishTaskButton(id)}
                   aria-label='完了する'
                   className='h-6 w-6 rounded-md border-2 border-stone-500'
                 />
               ) : (
                 <button
                   type='button'
-                  onClick={() => alert('unimplemented')}
+                  onClick={() => onClickUnfinishTaskButton(id)}
                   aria-label='未完了に戻す'
                   className='h-6 w-6 rounded-md border-2 border-stone-500 bg-stone-500'
                 />
