@@ -49,7 +49,8 @@ export const TaskTitle = ({ id, title, finishedAt }: Props) => {
           })}
           onClick={onClickTitle}
         >
-          {title}
+          <span>{title}</span>
+          <span className='sr-only'>のタイトルを編集する</span>
         </button>
       )}
     </>
