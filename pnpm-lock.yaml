@@ -69,6 +69,43 @@ importers:
         specifier: ^4.3.5
         version: 4.3.5
 
+  example:
+    dependencies:
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+    devDependencies:
+      '@kuma-ui/core':
+        specifier: ^0.0.4
+        version: 0.0.4(react@18.2.0)
+      '@kuma-ui/vite':
+        specifier: ^0.2.0
+        version: 0.2.0
+      '@types/react':
+        specifier: ^18.2.6
+        version: 18.2.6
+      '@types/react-dom':
+        specifier: ^18.2.4
+        version: 18.2.4
+      '@vitejs/plugin-react':
+        specifier: ^4.0.0
+        version: 4.0.0(vite@4.3.5)
+      autoprefixer:
+        specifier: ^10.4.14
+        version: 10.4.14(postcss@8.4.23)
+      postcss:
+        specifier: ^8.4.23
+        version: 8.4.23
+      tailwindcss:
+        specifier: ^3.3.2
+        version: 3.3.2
+      vite:
+        specifier: ^4.3.5
+        version: 4.3.5
+
 packages:
 
   /@alloc/quick-lru@5.2.0:
