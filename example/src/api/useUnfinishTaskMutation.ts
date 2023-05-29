@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const unfinishTask = (taskId: string) =>
   fetch(`http://localhost:8000/api/tasks/${taskId}`, {
@@ -9,9 +9,14 @@ const unfinishTask = (taskId: string) =>
   });
 
 export const useUnfinishTaskMutation = () => {
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationKey: ['unfinishTask'],
     mutationFn: unfinishTask,
+    onSuccess: () => {
+      queryClient.refetchQueries(['tasks']);
+    },
   });
 
   return mutation;

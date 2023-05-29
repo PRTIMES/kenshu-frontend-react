@@ -12,33 +12,17 @@ export const TopPage = () => {
   const unfinishTaskMutation = useUnfinishTaskMutation();
   const deleteTaskMutation = useDeleteTaskMutation();
 
-  const onClickCreateTaskButton = async () => {
-    // タスクを追加
-    await createTaskMutation.mutateAsync();
-    // タスク一覧を再取得
-    tasksQuery.refetch();
-  };
+  const onClickCreateTaskButton = () => createTaskMutation.mutate();
 
-  const onClickFinishTaskButton = async (taskId: string) => {
-    // タスクを完了
-    await finishTaskMutation.mutateAsync(taskId);
-    // タスク一覧を再取得
-    tasksQuery.refetch();
-  };
+  const onClickFinishTaskButton = async (taskId: string) =>
+    finishTaskMutation.mutate(taskId);
 
-  const onClickUnfinishTaskButton = async (taskId: string) => {
-    // タスクを未完了に戻す
-    await unfinishTaskMutation.mutateAsync(taskId);
-    // タスク一覧を再取得
-    tasksQuery.refetch();
-  };
+  const onClickUnfinishTaskButton = async (taskId: string) =>
+    unfinishTaskMutation.mutate(taskId);
 
   const onClickDeleteTaskButton = async (taskId: string) => {
     if (!confirm('本当に削除しますか？')) return;
-    // タスクを削除
-    await deleteTaskMutation.mutateAsync(taskId);
-    // タスク一覧を再取得
-    tasksQuery.refetch();
+    deleteTaskMutation.mutate(taskId);
   };
 
   return (

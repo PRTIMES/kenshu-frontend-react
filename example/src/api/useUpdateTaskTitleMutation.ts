@@ -1,4 +1,4 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const updateTaskTitle = ({
   taskId,
@@ -15,9 +15,14 @@ const updateTaskTitle = ({
   });
 
 export const useUpdateTaskTitleMutation = () => {
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationKey: ['updateTaskTitle'],
     mutationFn: updateTaskTitle,
+    onSuccess: () => {
+      queryClient.refetchQueries(['tasks']);
+    },
   });
 
   return mutation;
