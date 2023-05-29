@@ -74,19 +74,19 @@ importers:
       '@tanstack/react-query':
         specifier: ^4.29.11
         version: 4.29.11(react-dom@18.2.0)(react@18.2.0)
+      clsx:
+        specifier: ^1.2.1
+        version: 1.2.1
       react:
         specifier: ^18.2.0
         version: 18.2.0
       react-dom:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
+      tailwind-merge:
+        specifier: ^1.12.0
+        version: 1.12.0
     devDependencies:
-      '@kuma-ui/core':
-        specifier: ^0.2.0
-        version: 0.2.0(react@18.2.0)
-      '@kuma-ui/vite':
-        specifier: ^0.3.1
-        version: 0.3.1
       '@types/react':
         specifier: ^18.2.7
         version: 18.2.7
@@ -96,6 +96,18 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.0.0
         version: 4.0.0(vite@4.3.9)
+      autoprefixer:
+        specifier: ^10.4.14
+        version: 10.4.14(postcss@8.4.24)
+      postcss:
+        specifier: ^8.4.23
+        version: 8.4.24
+      prettier-plugin-tailwindcss:
+        specifier: ^0.3.0
+        version: 0.3.0(prettier@2.8.8)
+      tailwindcss:
+        specifier: ^3.3.2
+        version: 3.3.2
       vite:
         specifier: ^4.3.9
         version: 4.3.9
@@ -207,7 +219,7 @@ packages:
       '@babel/compat-data': 7.21.7
       '@babel/core': 7.21.8
       '@babel/helper-validator-option': 7.21.0
-      browserslist: 4.21.5
+      browserslist: 4.21.6
       lru-cache: 5.1.1
       semver: 6.3.0
     dev: true
@@ -761,23 +773,8 @@ packages:
       '@kuma-ui/system': 0.2.0
     dev: true
 
-  /@kuma-ui/babel-plugin@0.4.1:
-    resolution: {integrity: sha512-0inGu758SNe80TFzqBAVL/fL7QIags/4qSuue96HhHbZvCjMtSw5OnVz40ZD+oWDdLXcu/hWOqEGanAufbTHXw==}
-    dependencies:
-      '@kuma-ui/sheet': 0.1.1
-      '@kuma-ui/system': 0.4.1
-    dev: true
-
   /@kuma-ui/core@0.0.4(react@18.2.0):
     resolution: {integrity: sha512-k1ddMJ1tGVgUhqnxTrcpa50ZW1Y9uwgrf8+WKQKn0R7XFhf6h0ujnJmVcrOBC7+MVIZJeplH9aUJ2wVDRne+Ww==}
-    peerDependencies:
-      react: '>=18.2.0'
-    dependencies:
-      react: 18.2.0
-    dev: true
-
-  /@kuma-ui/core@0.2.0(react@18.2.0):
-    resolution: {integrity: sha512-XjyjNEVogoZuJaXWRUnATuvX8aRNKo4EGfGvpk3ShjEXwySCcxGYD7rklSenOh1jJ5mflrTzzDy6SxNGiKRzXw==}
     peerDependencies:
       react: '>=18.2.0'
     dependencies:
@@ -788,20 +785,10 @@ packages:
     resolution: {integrity: sha512-FqtKfnH+hyTNmTSGWMN4DOfWOuIApBCGy4i+GbHiJXRl3U6ZtLUO5bmFj5nC+ehJFUFiJI0amcVGnnYDWdssBg==}
     dev: true
 
-  /@kuma-ui/sheet@0.1.1:
-    resolution: {integrity: sha512-PX1RYXFg0zfwLs7/L9FVbFpc6SCy/eMHbACYUQwz7nKIOtHX6JwcXeMIvDCyuKsA/UILtvOnwmGTXgyNDTHmpw==}
-    dev: true
-
   /@kuma-ui/system@0.2.0:
     resolution: {integrity: sha512-+1kBYH7PyJxpodyhrAVuP06zdfcixhpGXrIq3cCDHwt1Ax27dIBNW1h+f/9YnoD+21PDE22L9iB7YliALPjrCw==}
     dependencies:
       '@kuma-ui/sheet': 0.1.0
-    dev: true
-
-  /@kuma-ui/system@0.4.1:
-    resolution: {integrity: sha512-i5m4Rnp+Tmr+LueNgUhoZtUWIk1jDzoTtBOa2bdCNOZFTY52MI4EkYbIlSYF4qrAQu054o+pnP9wSfVMtFE4iA==}
-    dependencies:
-      '@kuma-ui/sheet': 0.1.1
     dev: true
 
   /@kuma-ui/vite@0.2.0:
@@ -809,13 +796,6 @@ packages:
     dependencies:
       '@kuma-ui/babel-plugin': 0.1.1
       '@kuma-ui/sheet': 0.1.0
-    dev: true
-
-  /@kuma-ui/vite@0.3.1:
-    resolution: {integrity: sha512-zWfeDfpReUhy6GdvUpc1hrGU0aOARO4R/dyxTSJdT+KTFvc306u80uDUIOm9FxdQ33b+q328ihE/2rVPGDTByQ==}
-    dependencies:
-      '@kuma-ui/babel-plugin': 0.4.1
-      '@kuma-ui/sheet': 0.1.1
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
@@ -1037,6 +1017,22 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
+  /autoprefixer@10.4.14(postcss@8.4.24):
+    resolution: {integrity: sha512-FQzyfOsTlwVzjHxKEqRIAdJx9niO6VCBCoEwax/VLSoQF29ggECcPuBqUMZ+u8jCZOPSy8b8/8KnuFbp0SaFZQ==}
+    engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
+    peerDependencies:
+      postcss: ^8.1.0
+    dependencies:
+      browserslist: 4.21.5
+      caniuse-lite: 1.0.30001487
+      fraction.js: 4.2.0
+      normalize-range: 0.1.2
+      picocolors: 1.0.0
+      postcss: 8.4.24
+      postcss-value-parser: 4.2.0
+    dev: true
+
   /available-typed-arrays@1.0.5:
     resolution: {integrity: sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==}
     engines: {node: '>= 0.4'}
@@ -1070,7 +1066,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001487
+      caniuse-lite: 1.0.30001489
       electron-to-chromium: 1.4.394
       node-releases: 2.0.10
       update-browserslist-db: 1.0.11(browserslist@4.21.5)
@@ -1134,6 +1130,11 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /clsx@1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
+    dev: false
 
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -1671,6 +1672,67 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
+  /prettier-plugin-tailwindcss@0.3.0(prettier@2.8.8):
+    resolution: {integrity: sha512-009/Xqdy7UmkcTBpwlq7jsViDqXAYSOMLDrHAdTMlVZOrKfM2o9Ci7EMWTMZ7SkKBFTG04UM9F9iM2+4i6boDA==}
+    engines: {node: '>=12.17.0'}
+    peerDependencies:
+      '@ianvs/prettier-plugin-sort-imports': '*'
+      '@prettier/plugin-pug': '*'
+      '@shopify/prettier-plugin-liquid': '*'
+      '@shufo/prettier-plugin-blade': '*'
+      '@trivago/prettier-plugin-sort-imports': '*'
+      prettier: '>=2.2.0'
+      prettier-plugin-astro: '*'
+      prettier-plugin-css-order: '*'
+      prettier-plugin-import-sort: '*'
+      prettier-plugin-jsdoc: '*'
+      prettier-plugin-marko: '*'
+      prettier-plugin-organize-attributes: '*'
+      prettier-plugin-organize-imports: '*'
+      prettier-plugin-style-order: '*'
+      prettier-plugin-svelte: '*'
+      prettier-plugin-twig-melody: '*'
+    peerDependenciesMeta:
+      '@ianvs/prettier-plugin-sort-imports':
+        optional: true
+      '@prettier/plugin-pug':
+        optional: true
+      '@shopify/prettier-plugin-liquid':
+        optional: true
+      '@shufo/prettier-plugin-blade':
+        optional: true
+      '@trivago/prettier-plugin-sort-imports':
+        optional: true
+      prettier-plugin-astro:
+        optional: true
+      prettier-plugin-css-order:
+        optional: true
+      prettier-plugin-import-sort:
+        optional: true
+      prettier-plugin-jsdoc:
+        optional: true
+      prettier-plugin-marko:
+        optional: true
+      prettier-plugin-organize-attributes:
+        optional: true
+      prettier-plugin-organize-imports:
+        optional: true
+      prettier-plugin-style-order:
+        optional: true
+      prettier-plugin-svelte:
+        optional: true
+      prettier-plugin-twig-melody:
+        optional: true
+    dependencies:
+      prettier: 2.8.8
+    dev: true
+
+  /prettier@2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
   /prisma@4.14.0:
     resolution: {integrity: sha512-+5dMl1uxMQb4RepndY6AwR9xi1cDcaGFICu+ws6/Nmgt93mFPNj8tYxSfTdmfg+rkNrUId9rk/Ac2vTgLe/oXA==}
     engines: {node: '>=14.17'}
@@ -1806,6 +1868,10 @@ packages:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /tailwind-merge@1.12.0:
+    resolution: {integrity: sha512-Y17eDp7FtN1+JJ4OY0Bqv9OA41O+MS8c1Iyr3T6JFLnOgLg3EvcyMKZAnQ8AGyvB5Nxm3t9Xb5Mhe139m8QT/g==}
+    dev: false
 
   /tailwindcss@3.3.2:
     resolution: {integrity: sha512-9jPkMiIBXvPc2KywkraqsUfbfj+dHDb+JPWtSJa9MLFdrPyazI7q6WX2sUrm7R9eVR7qqv3Pas7EvQFzxKnI6w==}
@@ -1955,7 +2021,7 @@ packages:
         optional: true
     dependencies:
       esbuild: 0.17.19
-      postcss: 8.4.23
+      postcss: 8.4.24
       rollup: 3.21.6
     optionalDependencies:
       fsevents: 2.3.2
