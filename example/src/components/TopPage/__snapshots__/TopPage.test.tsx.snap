@@ -1,0 +1,126 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TopPage > HTML とスタイルが変わらないこと 1`] = `
+<DocumentFragment>
+  <main
+    class="min-h-screen bg-stone-50 px-2 pt-8"
+  >
+    <div
+      class="mx-auto flex max-w-3xl flex-col gap-4 rounded-lg bg-white p-5 shadow-md"
+    >
+      <header
+        class="flex items-center justify-between"
+      >
+        <h1
+          class="text-lg font-bold"
+        >
+          TODO リスト
+        </h1>
+        <button
+          class="rounded-lg bg-orange-500 px-2 py-1 text-sm text-white hover:bg-orange-400"
+          type="button"
+        >
+          タスクを追加
+        </button>
+      </header>
+      <ul
+        class="grid list-none gap-4"
+      >
+        <li
+          class="flex items-center justify-between"
+        >
+          <div
+            class="flex items-center gap-4"
+          >
+            <button
+              aria-label="未完了に戻す"
+              class="h-6 w-6 rounded-md border-2 border-stone-500 bg-stone-500"
+              type="button"
+            />
+            <button
+              class="text-stone-400 line-through"
+            >
+              <span>
+                Get up
+              </span>
+              <span
+                class="sr-only"
+              >
+                のタイトルを編集する
+              </span>
+            </button>
+          </div>
+          <button
+            class="rounded-lg bg-red-500 px-2 py-1 text-sm text-white hover:bg-red-400"
+            type="button"
+          >
+            削除
+          </button>
+        </li>
+        <li
+          class="flex items-center justify-between"
+        >
+          <div
+            class="flex items-center gap-4"
+          >
+            <button
+              aria-label="完了する"
+              class="h-6 w-6 rounded-md border-2 border-stone-500"
+              type="button"
+            />
+            <button
+              class=""
+            >
+              <span>
+                Eat breakfast
+              </span>
+              <span
+                class="sr-only"
+              >
+                のタイトルを編集する
+              </span>
+            </button>
+          </div>
+          <button
+            class="rounded-lg bg-red-500 px-2 py-1 text-sm text-white hover:bg-red-400"
+            type="button"
+          >
+            削除
+          </button>
+        </li>
+        <li
+          class="flex items-center justify-between"
+        >
+          <div
+            class="flex items-center gap-4"
+          >
+            <button
+              aria-label="完了する"
+              class="h-6 w-6 rounded-md border-2 border-stone-500"
+              type="button"
+            />
+            <button
+              class=""
+            >
+              <span>
+                Go to school
+              </span>
+              <span
+                class="sr-only"
+              >
+                のタイトルを編集する
+              </span>
+            </button>
+          </div>
+          <button
+            class="rounded-lg bg-red-500 px-2 py-1 text-sm text-white hover:bg-red-400"
+            type="button"
+          >
+            削除
+          </button>
+        </li>
+      </ul>
+    </div>
+  </main>
+</DocumentFragment>
+`;
